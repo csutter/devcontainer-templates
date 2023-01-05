@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Set up environment for tests to run (must be run before anything else)
 # Arguments:
 #   - name of the current template being tested (e.g. `ruby`)
@@ -18,24 +20,24 @@ setup() {
 
   # Set up and empty test directory, ensuring test root directory exists
   mkdir -p $TEST_ROOT || true
-  rm -rf $TEST_DIR
+  rm -rf "$TEST_DIR"
 
   # Copy devcontainer sources and test scripts/data to temporary directory
-  cp -R "$SRC_DIR"/../../src/$TEMPLATE $TEST_ROOT/
-  cp -R "$SRC_DIR"/../../test/$TEMPLATE $TEST_ROOT/
+  cp -R "$SRC_DIR"/../../src/"$TEMPLATE" $TEST_ROOT/
+  cp -R "$SRC_DIR"/../../test/"$TEMPLATE" $TEST_ROOT/
 
   # Validate template is valid JSON before doing anything else and getting into a weird place
-  jq . $TEST_DIR/devcontainer-template.json > /dev/null
+  jq . "$TEST_DIR"/devcontainer-template.json > /dev/null
 
   # Substitute image tag from template options
   #   A "supporting tool" (e.g. VS Code) would normally do this as part of the interactive
   #   installation process
   #   TODO: Revisit this in the future to see if there is a neater way to do this, for example with
   #     future `devcontainer` CLI functionality
-  sed -i -e "s/\${templateOption:imageVariant}/${IMAGE_TAG}/g" $TEST_DIR/.devcontainer/Dockerfile
+  sed -i -e "s/\${templateOption:imageVariant}/${IMAGE_TAG}/g" "$TEST_DIR"/.devcontainer/Dockerfile
 
   # Start devcontainer
-  devcontainer up --workspace-folder $TEST_DIR --id-label $ID_LABEL
+  devcontainer up --workspace-folder "$TEST_DIR" --id-label "$ID_LABEL"
 }
 
 # Clean up after ourselves on success or failure
@@ -45,7 +47,7 @@ cleanup() {
   [[ -z "$CONTAINER" ]] || docker rm -f "$CONTAINER" > /dev/null
 
   # Remove test directory
-  rm -rf $TEST_DIR
+  rm -rf "$TEST_DIR"
 }
 cleanup_from_error_or_interrupt() {
   cleanup
@@ -59,12 +61,15 @@ run_test() {
   local cmd=$2
   local expected_result=$3
 
+  local result
   # `devcontainer exec` gives its _own_ output on stdout, with the actual output of the command run
   # on stderr. In theory, we could validate that the exec output includes `{"outcome": "success"}`,
   # but if we get the expected output from the exec'd command back that's good enough anyway.
   # Also as this script is set to abort on error, make sure we continue running even if the exit
   # code of the in-container execution is non-zero.
-  local result
+  #
+  # We _want_ $cmd to be split here as it could include arguments:
+  # shellcheck disable=SC2086
   result=$(devcontainer exec --workspace-folder "$TEST_DIR" --id-label "$ID_LABEL" $cmd 2>&1 1> /dev/null || true)
 
   case "$result" in

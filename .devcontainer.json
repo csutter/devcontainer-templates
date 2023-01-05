@@ -12,5 +12,5 @@
 			]
 		}
 	},
-	"postCreateCommand": "npm install -g @devcontainers/cli"
+	"postCreateCommand": "npm install -g @devcontainers/cli && sudo apt update && sudo apt install shellcheck"
 }
