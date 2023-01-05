@@ -12,5 +12,5 @@
 			]
 		}
 	},
-	"postCreateCommand": "npm install -g @devcontainers/cli@^0.26.1"
+	"postCreateCommand": "npm install -g @devcontainers/cli"
 }
