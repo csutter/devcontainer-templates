@@ -1,9 +1,13 @@
-# lightweight-devcontainer-templates
+# devcontainer-templates
 
-My personal, lightweight alternatives to the [default devcontainer templates][vsc_defaults].
+A set of devcontainer templates following the nascent [devcontainer template spec][spec_proposal].
+
+This repository contains both "barebones" templates aiming to be more lightweight and "batteries
+excluded" than the [default templates][vsc_defaults], and some more complex "opinionated" templates
+that reflect my personal perspective on a good starting point for new projects in ecosystems/stacks
+I frequently use.
 
 ## Motivation
-
 [Development containers][devcontainers] ("devcontainers") are a core part of my development
 workflow. Microsoft curates an ecosystem of images, templates, and plug-in features that allow users
 to get started quickly and provide deep integration into VS Code.
@@ -17,39 +21,44 @@ default templates, and the preconfigured images that the templates use:
 * The images add a level of abstraction and dependencies that makes them harder to reason about than
   a manually maintained `Dockerfile`
 * The images are overoptimised for integration with Microsoft tooling
-* The generated configuration contains lots of scaffolding that is often left in by developers but
-  gets outdated as the spec evolves
+* The generated configuration contains lots of superfluous scaffolding that is often left in by
+  developers or left commented but gets outdated as the spec evolves
+* The generated configuration for some stacks/ecosystems could be more useful in terms of including
+  best practices to take full advantage of devcontainers
 
-Some of these issues can be worked around by overriding the default configuration, but still add
-cruft. I was looking for a more "bring your own batteries" approach.
+I was looking for a more barebones, explicit, and customisable approach on the one hand, and some
+more specific and opinionated templates on the other. A set of templates that I could use to set up
+a new project in minimal time, without having to refer back to previous projects for inspiration,
+and that I could evolve as time goes on.
 
-That said, I'm sure the default templates and images are a great help to less experienced developers
-who just want to get started quickly, and those who aren't as familiar with the Docker ecosystem,
-so they do have their place.
+Consider these templates to complement the default "official" ones - especially for inexperienced
+developers and those who don't want to have to customise their environment, the official templates
+are probably a better choice.
 
 ## Goals
+Ultimately, the primary goal of these templates is to meet my need for professional-grade templates
+to use when I set up a new project, without having to refer back to previous projects for
+inspiration, and that I could evolve as time goes on and the spec and my needs change.
 
-Ultimately, the primary goal of these templates is to meet my need of simple templates to use when
-I start a new project - both production-grade projects and throwaway experiments - and avoid the
-need to have to copy and adapt configuration from a previous project.
-
-The templates should have:
-* Trivial configuration that is easy to understand, extend, customise, and maintain
-* Default upstream Docker images for the target language/ecosystem
-* No tooling and customisation by default, beyond scaffolding required to:
-  * run a basic application in the target language/ecosystem, and
-  * be able to install additional development tools on a non-root user level (as the upstream
-    images are geared towards production deployments)
+The templates should:
+- set a "gold standard" for how I would set up a new (or existing) project for a given stack to use
+  devcontainers
+- have simple configuration that is easy to understand, extend, customise, and maintain
+- use default upstream Docker images for the target language/ecosystem
+- keep the footprint of tooling and customisation small (or to the bare minimum in case of
+  "barebones" templates)
+- use a non-root user, but allow for `sudo` (many upstream images are geared towards production
+  deployments and run as `root`)
 
 ## Suggested usage
-
 Use the templates to generate a basic devcontainer setup, then customise as follows:
 
 * Add OS-level setup and system-level dependencies (e.g. OS package manager packages) to the
   `Dockerfile`
 * Run add project-specific setup and development ecosystem dependency installation using a
   `postCreateCommand` in `devcontainer.json`. If it consists of more than one or two commands,
-  consider adding a shell script in the `.devcontainer` folder and running that
+  consider adding a shell script in the `.devcontainer` folder and running that (the opinionated
+  templates may already have one)
 * Add the minimum necessary set of VS Code extensions and configuration to `devcontainer.json`
   (leaving space for other contributors/team members to not be overloaded with default setup)
 * Any personal preferences of individual developers (e.g. environment customisation or tool
@@ -57,7 +66,13 @@ Use the templates to generate a basic devcontainer setup, then customise as foll
   an installation script in the process (see the Debian section in [my personal dotfiles][punkt]
   install script for an example of how to achieve this).
 
+## Contributions
+I've not yet figured out if I want to accept contributions to this repository. If you have an idea
+for a bug fix, improvement, or new template that would fit within the scope and philosophy of this
+project, please open an issue before you put in substantial work!
+
 [devcontainers]: https://containers.dev
 [punkt]: https://github.com/csutter/punkt/blob/main/install.sh
 [ruby_issue]: https://github.com/microsoft/vscode-dev-containers/issues/704
+[spec_proposal]: https://github.com/devcontainers/spec/blob/main/proposals/devcontainer-templates.md
 [vsc_defaults]: https://github.com/devcontainers/templates

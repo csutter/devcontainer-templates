@@ -1,11 +1,11 @@
 {
-  "id": "nodejs",
+  "id": "barebones-nodejs",
   "version": "0.1.0",
   "name": "Node.js",
-  "description": "A lightweight devcontainer for Node.js/Javascript applications",
+  "description": "A barebones devcontainer for Node.js/Javascript applications",
   "publisher": "Christian Sutter",
-  "documentationURL": "https://github.com/csutter/lightweight-devcontainer-templates",
-  "licenseURL": "https://github.com/csutter/lightweight-devcontainer-templates/blob/main/LICENSE",
+  "documentationURL": "https://github.com/csutter/devcontainer-templates",
+  "licenseURL": "https://github.com/csutter/devcontainer-templates/blob/main/LICENSE",
   "options": {
     "imageVariant": {
       "type": "string",

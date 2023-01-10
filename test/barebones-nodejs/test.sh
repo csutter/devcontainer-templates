@@ -2,7 +2,7 @@
 set -euo pipefail
 source "$(dirname "$0")/../harness.sh"
 
-setup "nodejs" "18.12.1"
+setup "barebones-nodejs" "18.12.1"
 
 run_test "Node version is correct" "node -v" "18.12.1"
 run_test "NPM is present" "npm --help" "npm <command>"

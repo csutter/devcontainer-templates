@@ -26,7 +26,7 @@ jobs:
         run: test/lint.sh
 
       # TODO: This'll do for now, but generalise these soon
-      - name: Run Node.js template test
-        run: test/nodejs/test.sh
-      - name: Run Ruby template test
-        run: test/ruby/test.sh
+      - name: Run barebones-nodejs template test
+        run: test/barebones-nodejs/test.sh
+      - name: Run barebones-ruby template test
+        run: test/barebones-ruby/test.sh
