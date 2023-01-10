@@ -1,5 +1,5 @@
 {
-	"name": "lightweight-devcontainer-templates",
+	"name": "csutter-devcontainer-templates",
 	"build": {
 		"dockerfile": "Dockerfile"
 	},

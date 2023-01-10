@@ -12,7 +12,7 @@ setup() {
   ID_LABEL="devcontainer-test=$TEMPLATE"
 
   SRC_DIR=$(dirname "$0")
-  TEST_ROOT=/tmp/lightweight-devcontainer-templates
+  TEST_ROOT=/tmp/devcontainer-templates
   TEST_DIR=$TEST_ROOT/$TEMPLATE
 
   PASSED_TESTS=0
