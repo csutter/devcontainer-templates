@@ -1,0 +1,19 @@
+{
+  "name": "devcontainer-templates",
+  "version": "1.0.0",
+  "description": "A set of devcontainer templates following the nascent devcontainer template spec.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csutter/devcontainer-templates.git"
+  },
+  "author": "Christian Sutter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/csutter/devcontainer-templates/issues"
+  },
+  "homepage": "https://github.com/csutter/devcontainer-templates#readme",
+  "private": true,
+  "devDependencies": {
+    "@devcontainers/cli": "^0.66.0"
+  }
+}

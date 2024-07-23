@@ -7,26 +7,56 @@ on:
   pull_request:
 
 jobs:
-  test:
-    name: "Run test suite for templates"
+  setup:
+    name: "Setup environment and determine templates"
+    runs-on: ubuntu-latest
+    outputs:
+      template_dirs: ${{ steps.get-dirs.outputs.dirs }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Get list of test directories
+        id: get-dirs
+        run: echo "dirs=$(ls -d test/*/ | jq -R -s -c 'split("\n")[:-1] | map(split("/")[1])')" >> $GITHUB_OUTPUT
+
+  lint:
+    name: "Run linting"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Install devcontainer CLI
-        run: npm install -g @devcontainers/cli
-
       - name: Run linting
         run: test/lint.sh
 
-      # TODO: This'll do for now, but generalise these soon
-      - name: Run barebones-nodejs template test
-        run: test/barebones-nodejs/test.sh
-      - name: Run barebones-ruby template test
-        run: test/barebones-ruby/test.sh
+  test-templates:
+    name: "Run template tests"
+    needs: setup
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        template: ${{ fromJson(needs.setup.outputs.template_dirs) }}
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Run test for ${{ matrix.template }}
+        run: test/${{ matrix.template }}/test.sh

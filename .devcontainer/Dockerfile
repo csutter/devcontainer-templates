@@ -13,4 +13,3 @@ ENV DEVCONTAINER=true
 
 # Install additional tools for devcontainer template development
 RUN apt install -y jq shellcheck
-RUN npm install -g @devcontainers/cli
