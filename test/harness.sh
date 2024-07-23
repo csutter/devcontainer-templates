@@ -70,7 +70,7 @@ run_test() {
   #
   # We _want_ $cmd to be split here as it could include arguments:
   # shellcheck disable=SC2086
-  result=$(devcontainer exec --workspace-folder "$TEST_DIR" --id-label "$ID_LABEL" $cmd 2>&1 1> /dev/null || true)
+  result=$(devcontainer exec --workspace-folder "$TEST_DIR" --id-label "$ID_LABEL" $cmd || true)
 
   case "$result" in
     *$expected_result*)
@@ -93,6 +93,6 @@ end_tests() {
 
   # Succeed if there are no failed tests, but also make sure that at least one test has passed
   # (otherwise something else might have gone wrong)
-  [ $FAILED_TESTS -eq 0 ] && [ $PASSED_TESTS -gt 0 ]
+  [ "$FAILED_TESTS" -eq 0 ] && [ "$PASSED_TESTS" -gt 0 ]
 }
 trap "end_tests" EXIT
