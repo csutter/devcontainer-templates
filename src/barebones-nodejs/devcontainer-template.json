@@ -11,9 +11,10 @@
       "type": "string",
       "description": "Upstream 'node' image tag (see hub.docker.com):",
       "proposals": [
-          "18"
+          "20",
+          "22"
       ],
-      "default": "18"
+      "default": "20"
     }
   },
   "platforms": ["Node.js", "JavaScript"]

@@ -2,7 +2,7 @@
 set -euo pipefail
 source "$(dirname "$0")/../harness.sh"
 
-setup "barebones-ruby" "3.2.0"
+setup "barebones-ruby" "3.3.4"
 
 run_test "Ruby version is correct" "ruby -v" "$IMAGE_TAG"
 run_test "Sample script runs" "ruby sample.rb" "Hello world"
