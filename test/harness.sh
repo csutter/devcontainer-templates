@@ -37,7 +37,7 @@ setup() {
   sed -i -e "s/\${templateOption:imageVariant}/${IMAGE_TAG}/g" "$TEST_DIR"/.devcontainer/Dockerfile
 
   # Start devcontainer
-  devcontainer up --workspace-folder "$TEST_DIR" --id-label "$ID_LABEL"
+  npx devcontainer up --workspace-folder "$TEST_DIR" --id-label "$ID_LABEL"
 }
 
 # Clean up after ourselves on success or failure
@@ -70,7 +70,7 @@ run_test() {
   #
   # We _want_ $cmd to be split here as it could include arguments:
   # shellcheck disable=SC2086
-  result=$(devcontainer exec --workspace-folder "$TEST_DIR" --id-label "$ID_LABEL" $cmd || true)
+  result=$(npx devcontainer exec --workspace-folder "$TEST_DIR" --id-label "$ID_LABEL" $cmd || true)
 
   case "$result" in
     *$expected_result*)
