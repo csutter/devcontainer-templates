@@ -1,6 +1,6 @@
 # devcontainer-templates
 
-A set of devcontainer templates following the nascent [devcontainer template spec][spec_proposal].
+A set of devcontainer templates following the [devcontainer template spec][spec_final].
 
 This repository contains both "barebones" templates aiming to be more lightweight and "batteries
 excluded" than the [default templates][vsc_defaults], and some more complex "opinionated" templates
@@ -74,5 +74,5 @@ project, please open an issue before you put in substantial work!
 [devcontainers]: https://containers.dev
 [punkt]: https://github.com/csutter/punkt/blob/main/install.sh
 [ruby_issue]: https://github.com/microsoft/vscode-dev-containers/issues/704
-[spec_proposal]: https://github.com/devcontainers/spec/blob/main/proposals/devcontainer-templates.md
+[spec_final]: https://github.com/devcontainers/spec/blob/main/docs/specs/devcontainer-templates.md
 [vsc_defaults]: https://github.com/devcontainers/templates
