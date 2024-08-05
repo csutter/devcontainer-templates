@@ -26,6 +26,9 @@ setup() {
   cp -R "$SRC_DIR"/../../src/"$TEMPLATE" $TEST_ROOT/
   cp -R "$SRC_DIR"/../../test/"$TEMPLATE" $TEST_ROOT/
 
+  # Ensure temporary directory is writable by the container
+  chmod -R 777 $TEST_ROOT
+
   # Validate template is valid JSON before doing anything else and getting into a weird place
   jq . "$TEST_DIR"/devcontainer-template.json > /dev/null
 

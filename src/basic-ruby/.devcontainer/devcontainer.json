@@ -1,0 +1,26 @@
+// See https://containers.dev/implementors/json_reference/ for configuration reference
+{
+  "name": "New Ruby project",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "devcontainer",
+  "postCreateCommand": "bundle install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Shopify.ruby-lsp",
+        "KoichiSasada.vscode-rdbg"
+      ],
+      "settings": {
+        "rubyLsp.rubyVersionManager": {
+          "identifier": "none" // Force native container Ruby
+        },
+        "[ruby]": {
+          "editor.defaultFormatter": "Shopify.ruby-lsp",
+          "editor.formatOnSave": true
+        }
+      }
+    }
+  },
+}
