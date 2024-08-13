@@ -1,0 +1,20 @@
+{
+  "id": "basic-ruby",
+  "version": "1.0.0",
+  "name": "Basic Ruby application",
+  "description": "A devcontainer for basic Ruby applications",
+  "publisher": "Christian Sutter",
+  "documentationURL": "https://github.com/csutter/devcontainer-templates",
+  "licenseURL": "https://github.com/csutter/devcontainer-templates/blob/main/LICENSE",
+  "options": {
+    "imageVariant": {
+      "type": "string",
+      "description": "Upstream 'ruby' image tag (see hub.docker.com):",
+      "proposals": [
+          "3.3"
+      ],
+      "default": "3.3"
+    }
+  },
+  "platforms": ["Ruby"]
+}
